@@ -1,0 +1,11 @@
+name: numpyTest
+channels:
+  - defaults
+dependencies:
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - scipy
+  - sympy
+  - cudatoolkit
+prefix: /home/codemaster/anaconda3/envs/numpyTest

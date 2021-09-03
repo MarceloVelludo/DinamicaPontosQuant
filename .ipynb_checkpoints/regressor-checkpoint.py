@@ -1,0 +1,45 @@
+import DPQNova
+import graphics
+from time import perf_counter
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+t0 = perf_counter()
+dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= j_1*0.8, j_1_final= j_1*1.2, passoJ_1 = 0.1,
+                                      j_2_inicial= j_2*0.8, j_2_final= j_2*1.2, passoJ_2 = 0.1,
+                                      bz_1_inicial= bz_1*0.8, bz_1_final= bz_1*1.2, passoBz_1 = 0.01,
+                                      bz_2_inicial= bz_2*0.8, bz_2_final= bz_2*1.2, passoBz_2 = 0.01,
+                                      j_12_inicial= j_12*0.8, j_12_final= j_12*1.2, passoJ_12 = 0.0001,
+                                      tInicial=5, tFinal=25, passoT=5)
+
+df = dpq.criaDataFrame()
+t1 = perf_counter()
+
+X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 0)
+reg = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
+
+y_pred = reg.predict(X_train, y_train)
+t2 = perf_counter()
+mae = mean_absolute_error(y_train, y_pred)
+mse = mean_squared_error(y_train, y_pred)
+r2 = r2_score(y_train,y_pred)
+
+with open("Speed.txt", "w") as text_file:
+    text_file.write("Tempo tabela: %f \nTempo regressor: %f" % (t1-t0,t1-t2))
+
+
+with open("ResultadosTreino.txt", "w") as text_file:
+    text_file.write("Média do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f" % (mae, mse, r2))
+plotGraph(y_test,y_pred, "Extra Trees Regressor Train")
+    
+y_pred = reg.predict(X_test, y_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test,y_pred)
+
+with open("ResultadosTest.txt", "w") as text_file:
+    text_file.write("Média do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f" % (mae, mse, r2))
+
+plotGraph(y_test,y_pred, "Extra Trees Regressor Test")
