@@ -4,8 +4,6 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from pycaret.utils import enable_colab
-from pycaret.regression import * 
 from sympy.physics.quantum import TensorProduct
 from time import perf_counter 
 from scipy.linalg import expm
@@ -184,7 +182,9 @@ class DinamicaPontosQuanticos:
         #print("arrayJ_12:", self.arrayJ_12)
         #print("arrayT:", self.arrayT)
         #input()
-        for j12Dez in self.arrayJ_12:
+        j_12_len = len(self.arrayJ_12)
+        for index,j12Dez in enumerate(self.arrayJ_12):
+            print("{:.1f}\n".format(index/j_12_len))
             j_12 = j12Dez/decimalJ_12
             for j1Dez in self.arrayJ_1:
                 j_1 = j1Dez/decimalJ_1
