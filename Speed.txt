@@ -16,3 +16,15 @@ Tempo tabela: 4.523061
 Tempo regressor: 0.158462 
 Tempo tabela: 4.514227 
 Tempo regressor: 0.300251 
+Tempo tabela: 0.752250 
+Tempo regressor: 0.186427 
+Tempo tabela: 1684.317198 
+Tempo regressor: 30.804739 
+Tempo tabela: 36.432228 
+Tempo regressor: 0.458757 
+Tempo tabela: 38.318824 
+Tempo regressor: 0.478209 
+Tempo tabela: 1750.918637 
+Tempo regressor: 30.124971 
+Tempo tabela: 39.410761 
+Tempo regressor: 0.468242 
