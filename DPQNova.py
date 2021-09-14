@@ -299,10 +299,10 @@ class DinamicaPontosQuanticos:
         datasetY.to_csv(path_or_buf="./data/TabelasNovas/Y" +"yRealyPred -"+ self.name + ".csv")
         return
     
-    def save_Y(self, yReal, yPred):
-        print("shape:", np.array(yReal).reshape((400,-1)).shape)
-        yReal = np.array(yReal).reshape((400,-1))
-        yPred = np.array(yPred).reshape((400,-1))
+    def save_Y(self, yReal, yPred, lenght):
+        print("shape:", np.array(yReal).reshape((lenght,-1)).shape)
+        yReal = np.array(yReal).reshape((lenght,-1))
+        yPred = np.array(yPred).reshape((lenght,-1))
         datasetY = pd.DataFrame(np.hstack([yReal, yPred]), columns = ["yReal","yPred"])
         self.saveDataFrameY(datasetY)
         return datasetY
