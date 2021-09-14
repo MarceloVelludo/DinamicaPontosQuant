@@ -16,7 +16,7 @@ j_12 = pi/140
 
 t0 = perf_counter()
 
-dqp = DPQNova.DinamicaPontosQuanticos(j_1_inicial=1, j_1_final=1, passoJ_1 = 0.5,
+dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial=1, j_1_final=1, passoJ_1 = 0.5,
                  j_2_inicial=1, j_2_final=1, passoJ_2 = 0.5,
                  bz_1_inicial=0.1, bz_1_final=10, passoBz_1 = 1.0,
                  bz_2_inicial=0.1, bz_2_final=10, passoBz_2 = 1.0,
