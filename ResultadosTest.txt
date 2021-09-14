@@ -43,3 +43,8 @@ R2: 0.762370
 Média do erro absoluto: 1.057825 
 Média quadrada do erro: 2.433183 
 R2: 0.762370 
+====================
+[1:1:0.5][1:1:0.2][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][5:25:5]
+Média do erro absoluto: 1.057825 
+Média quadrada do erro: 2.433183 
+R2: 0.762370 
