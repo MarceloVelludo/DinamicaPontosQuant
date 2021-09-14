@@ -15,12 +15,21 @@ bz_2 = (pi/16)*(10**3)*mhz
 j_12 = pi/140
 
 t0 = perf_counter()
+<<<<<<< HEAD
 #dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= j_1*0.8, j_1_final= j_1*1.2, passoJ_1 = 0.1,
 #                                      j_2_inicial= j_2*0.8, j_2_final= j_2*1.2, passoJ_2 = 0.1,
 #                                      bz_1_inicial= bz_1*0.8, bz_1_final= bz_1*1.2, passoBz_1 = 0.01,
 #                                      bz_2_inicial= bz_2*0.8, bz_2_final= bz_2*1.2, passoBz_2 = 0.01,
 #                                      j_12_inicial= j_12*0.8, j_12_final= j_12*1.2, passoJ_12 = 0.0001,
 #                                      tInicial=5, tFinal=25, passoT=5)
+=======
+dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= j_1*0.8, j_1_final= j_1*1.2, passoJ_1 = 0.2,
+                                      j_2_inicial= j_2*0.8, j_2_final= j_2*1.2, passoJ_2 = 0.2,
+                                      bz_1_inicial= bz_1*0.8, bz_1_final= bz_1*1.2, passoBz_1 = 0.02,
+                                      bz_2_inicial= bz_2*0.8, bz_2_final= bz_2*1.2, passoBz_2 = 0.02,
+                                      j_12_inicial= j_12*0.8, j_12_final= j_12*1.2, passoJ_12 = 0.0005,
+                                      tInicial=5, tFinal=25, passoT=5)
+>>>>>>> ee45db39a875e33252e1b5b4c435d669868a5699
 
 dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial=1, j_1_final=1, passoJ_1 = 0.5,
                  j_2_inicial=1, j_2_final=1, passoJ_2 = 0.2,
@@ -65,4 +74,8 @@ with open("ResultadosTest.txt", "a+") as text_file:
 graphics.plotGraph(y_test,y_test_pred, "Extra Trees Regressor Test",dpq.name ,mae, mse, r2)
 
 dpq.saveDataFrame()
+<<<<<<< HEAD
 dpq.save_Y(y_test, y_test_pred, len(y_test))
+=======
+dpq.save_Y(y_test, y_test_pred, len(y_test))
+>>>>>>> ee45db39a875e33252e1b5b4c435d669868a5699
