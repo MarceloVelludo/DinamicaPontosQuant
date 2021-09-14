@@ -50,7 +50,7 @@ class DinamicaPontosQuanticos:
         self.passoT = passoT
         
         #Para criar relatorios
-        self.name = str("["+str(self.j_1_inicial[:5])+":"+str(self.j_1_final[:5])+":"+str(self.passoJ_1[:5])+"]"+"["+str(self.j_2_inicial[:5])+":"+str(self.j_2_final[:5])+":"+str(self.passoJ_2)[:5]+"]"+"["+str(self.bz_1_inicial[:5])+":"+str(self.bz_1_final[:5])+":"+str(self.passoBz_1[:5])+"]"+"["+str(self.bz_2_inicial[:5])+":"+str(self.bz_2_final[:5])+":"+str(self.passoBz_2[:5])+"]"+"["+str(self.j_12_inicial[:5])+":"+str(self.j_12_final[:5])+":"+str(self.passoJ_12[:5])+"]"+"["+str(self.tInicial[:5])+":"+str(self.tFinal[:5])+":"+str(self.passoT)[:5]+"]")
+        self.name = str("["+str(self.j_1_inicial)[:5]+":"+str(self.j_1_final)[:5]+":"+str(self.passoJ_1)[:5]+"]"+"["+str(self.j_2_inicial)[:5]+":"+str(self.j_2_final)[:5]+":"+str(self.passoJ_2)[:5]+"]"+"["+str(self.bz_1_inicial)[:5]+":"+str(self.bz_1_final)[:5]+":"+str(self.passoBz_1)[:5]+"]"+"["+str(self.bz_2_inicial)[:5]+":"+str(self.bz_2_final)[:5]+":"+str(self.passoBz_2)[:5]+"]"+"["+str(self.j_12_inicial)[:5]+":"+str(self.j_12_final)[:5]+":"+str(self.passoJ_12)[:5]+"]"+"["+str(self.tInicial)[:5]+":"+str(self.tFinal)[:5]+":"+str(self.passoT)[:5]+"]")
         
         #roInicial
         #UpUp
