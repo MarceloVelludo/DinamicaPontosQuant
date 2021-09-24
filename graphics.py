@@ -1,10 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 from matplotlib.pyplot import figure
 
 
 
 def plotGraph(y_test,y_pred,regressorName, name, mae, mse, r2):
+    try:
+        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 400))
+    except:
+        print("Gráfico com menos de 400 pontos")
+        
     if max(y_test) >= max(y_pred):
         my_range = int(max(y_test))
     else:

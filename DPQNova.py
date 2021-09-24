@@ -29,7 +29,7 @@ class DinamicaPontosQuanticos:
                  bz_1_inicial=0, bz_1_final=1, passoBz_1 = 0.5,
                  bz_2_inicial=0, bz_2_final=1, passoBz_2 = 0.5,
                  j_12_inicial=0, j_12_final=10, passoJ_12 = 0.1,
-                 tInicial=2, tFinal=20, passoT=2):
+                 tInicial=1, tFinal=20, passoT=1):
         self.j_1_inicial = j_1_inicial
         self.j_1_final = j_1_final
         self.j_2_inicial = j_2_inicial
@@ -309,22 +309,9 @@ class DinamicaPontosQuanticos:
         self.saveDataFrameY(datasetY)
         return datasetY
     
-    def criaFrameGraficos(self):
+    def criaFrameGraficosNovo(self):
         t0 = perf_counter()
         results = np.array([])
-        decimalA, decimalB, decimalJ, decimalT = self.countDecimal()
-        #print("inicial:", self.jInicial*decimalJ)
-        #print("final:", decimalJ*self.jFinal+self.passoJ*decimalJ)
-        #print("passo:", self.passoJ*decimalJ)
-        #print('self.passo:', self.passoJ)
-        #print('decimalA:', decimalA)
-        #print('decimalB:', decimalB)
-        #print('decimalJ:', decimalJ)
-        #print('decimalT:', decimalT)
-        arrayA = np.arange(self.aInicial*decimalA, decimalA*self.aFinal+self.passoA*decimalA, self.passoA*decimalA)
-        arrayB = np.arange(self.bInicial*decimalB, decimalB*self.bFinal+self.passoB*decimalB, self.passoB*decimalB)
-        arrayJ = np.arange(self.jInicial*decimalJ, decimalJ*self.jFinal+self.passoJ*decimalJ, self.passoJ*decimalJ)
-        arrayT = np.arange(self.tInicial*decimalT, decimalT*self.tFinal+self.passoT*decimalT, self.passoT*decimalT)
         ox1 = np.array([])
         ox2 = np.array([])
         oy1 = np.array([])
@@ -332,28 +319,22 @@ class DinamicaPontosQuanticos:
         oz1 = np.array([])
         oz2 = np.array([])
         tempos = np.array([])
-        #print("arrayJ:", arrayJ/decimalJ)
-        #print("arrayA:", arrayA/decimalA)
-        #print("arrayB:", arrayB/decimalB)
-        #print("arrayT:", arrayT/decimalT)
-        for jDez in arrayJ:
-            j = jDez/decimalJ
-            for aDez in arrayA:
-                a = aDez/decimalA 
-                for bDez in arrayB:
-                    b = bDez/decimalB
-                    resultsOx = np.array([])
-                    hvalor = self.hamiltoniana(a, b, j)
-                    for tDez in arrayT:
-                        t = tDez/10
-                        rovalor = self.ro(t,hvalor)
-                        ox1 = np.float32(np.append(ox1, self.Ox1(rovalor)))
-                        ox2 = np.float32(np.append(ox2, self.Ox2(rovalor)))
-                        oy1 = np.float32(np.append(oy1, self.Oy1(rovalor)))
-                        oy2 = np.float32(np.append(oy2, self.Oy2(rovalor)))
-                        oz1 = np.float32(np.append(oz1, self.Oz1(rovalor)))
-                        oz2 = np.float32(np.append(oz2, self.Oz2(rovalor)))
-                        tempos = np.append(tempos, t)
+        for j_12 in self.arrayJ_12:
+            for j_1 in self.arrayJ_1:
+                for j_2 in self.arrayJ_2:
+                    for bz_1 in self.arrayBz_1:
+                        for bz_2 in self.arrayBz_2:
+                            resultsOx = np.array([])
+                            hvalor = self.hamiltoniana(j_1, j_2, bz_1, bz_2, j_12)
+                            for t in self.arrayT:
+                                rovalor = self.ro(t,hvalor)
+                                ox1 = np.float32(np.append(ox1, self.Ox1(rovalor)))
+                                ox2 = np.float32(np.append(ox2, self.Ox2(rovalor)))
+                                oy1 = np.float32(np.append(oy1, self.Oy1(rovalor)))
+                                oy2 = np.float32(np.append(oy2, self.Oy2(rovalor)))
+                                oz1 = np.float32(np.append(oz1, self.Oz1(rovalor)))
+                                oz2 = np.float32(np.append(oz2, self.Oz2(rovalor)))
+                                tempos = np.append(tempos, t)
 
         t1 = perf_counter()
         
@@ -366,13 +347,14 @@ class DinamicaPontosQuanticos:
         print('tempos shape:', tempos.shape)
         print("Total tempo gasto: ", t1 - t0)
         return pd.DataFrame(ox1, columns = ['ox1']), pd.DataFrame(ox2, columns = ['ox2']), pd.DataFrame(oy1, columns = ['oy1']), pd.DataFrame(oy2, columns = ['oy2']), pd.DataFrame(oz1, columns = ['oz1']), pd.DataFrame(oz2, columns = ['oz2']), pd.DataFrame(tempos, columns = ['tempo'])
-    
-    def criaGraficos(self, dataFrame, tempos):
+
+    def criaGraficos(self, dataFrame, tempos,nome):
         fig, ax = plt.subplots()
         ax.plot(tempos, dataFrame)
         ax.set(xlabel='tempo', ylabel = dataFrame.columns, title = dataFrame.columns)
         ax.grid()
-        #fig.savefig("test.png")
-        plt.show()
+        fig.savefig(nome+".png")
+        #plt.show()
+        return
     
    
