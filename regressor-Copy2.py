@@ -21,7 +21,7 @@ dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial=1, j_1_final=1, passoJ_1 = 0.5
                  bz_1_inicial=0.1, bz_1_final=10, passoBz_1 = 1.0,
                  bz_2_inicial=0.1, bz_2_final=10, passoBz_2 = 1.0,
                  j_12_inicial=0.1, j_12_final=10, passoJ_12 = 1.0,
-                 tInicial=5, tFinal=25, passoT=5)
+                 tInicial=1, tFinal=20, passoT=1)
 
 df = dpq.criaDataFrame()
 t1 = perf_counter()

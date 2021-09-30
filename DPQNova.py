@@ -50,7 +50,7 @@ class DinamicaPontosQuanticos:
         self.passoT = passoT
         
         #Para criar relatorios
-        self.name = str("["+str(self.j_1_inicial)[:5]+":"+str(self.j_1_final)[:5]+":"+str(self.passoJ_1)[:5]+"]"+"["+str(self.j_2_inicial)[:5]+":"+str(self.j_2_final)[:5]+":"+str(self.passoJ_2)[:5]+"]"+"["+str(self.bz_1_inicial)[:5]+":"+str(self.bz_1_final)[:5]+":"+str(self.passoBz_1)[:5]+"]"+"["+str(self.bz_2_inicial)[:5]+":"+str(self.bz_2_final)[:5]+":"+str(self.passoBz_2)[:5]+"]"+"["+str(self.j_12_inicial)[:5]+":"+str(self.j_12_final)[:5]+":"+str(self.passoJ_12)[:5]+"]"+"["+str(self.tInicial)[:5]+":"+str(self.tFinal)[:5]+":"+str(self.passoT)[:5]+"]")
+        self.name = str("["+str(self.j_1_inicial)[:4]+":"+str(self.j_1_final)[:4]+":"+str(self.passoJ_1)[:4]+"]"+"["+str(self.j_2_inicial)[:4]+":"+str(self.j_2_final)[:4]+":"+str(self.passoJ_2)[:4]+"]"+"["+str(self.bz_1_inicial)[:4]+":"+str(self.bz_1_final)[:4]+":"+str(self.passoBz_1)[:4]+"]"+"["+str(self.bz_2_inicial)[:4]+":"+str(self.bz_2_final)[:4]+":"+str(self.passoBz_2)[:4]+"]"+"["+str(self.j_12_inicial)[:4]+":"+str(self.j_12_final)[:4]+":"+str(self.passoJ_12)[:4]+"]"+"["+str(self.tInicial)[:3]+":"+str(self.tFinal)[:3]+":"+str(self.passoT)[:4]+"]")
         
         self.name_comp = str("["+str(self.j_1_inicial)+":"+str(self.j_1_final)+":"+str(self.passoJ_1)+"]"+"["+str(self.j_2_inicial)+":"+str(self.j_2_final)+":"+str(self.passoJ_2)+"]"+"["+str(self.bz_1_inicial)+":"+str(self.bz_1_final)+":"+str(self.passoBz_1)+"]"+"["+str(self.bz_2_inicial)+":"+str(self.bz_2_final)+":"+str(self.passoBz_2)+"]"+"["+str(self.j_12_inicial)+":"+str(self.j_12_final)+":"+str(self.passoJ_12)+"]"+"["+str(self.tInicial)+":"+str(self.tFinal)+":"+str(self.passoT)+"]")
         

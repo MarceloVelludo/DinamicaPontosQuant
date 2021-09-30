@@ -54,7 +54,7 @@ with open("ResultadosTest.txt", "a+") as text_file:
     text_file.write("\n%s"%(dpq.name_comp))
     text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f \n" % (mae, mse, r2))
 
-graphics.plotGraph(y_test,y_test_pred, "Extra Trees Regressor Test",dpq.name_comp ,mae, mse, r2)
+graphics.plotGraph(y_test,y_test_pred, "Extra Trees Regressor Test",dpq.name ,mae, mse, r2)
 
 dpq.saveDataFrame()
 
