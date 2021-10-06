@@ -146,44 +146,48 @@ class DinamicaPontosQuanticos:
     #Definindo a função operador densidade.
     def ro(self,t, h):
         u = self.u(t, h)
-        return np.matmul(np.matmul(u,self.ro0), np.array(np.matrix(u).getH()))
+        #print("u:\n", u)
+        #print("matrix:\n", np.matrix(u))
+        #print("matrix dagger:\n", np.matrix(u).getH())
+        #input()
+        return np.dot(np.dot(u,self.ro0), np.array(np.matrix(u).getH()))
 
 
     #--------------------------------------------------
     #Observaveis:
     #Definindo a função O^(1)_x 
     def Ox1(self,ro):
-        a = np.matmul(self.tensorProductSigXIdent, ro)
+        a = np.dot(self.tensorProductSigXIdent, ro)
         return np.trace(a)
 
 
     #Definindo a função O^(2)_x 
     def Ox2(self,ro):
-        a = np.matmul(self.tensorProductIdentSigX, ro)
+        a = np.dot(self.tensorProductIdentSigX, ro)
         return np.trace(a)
 
     #--------------------------------------------------
     #Definindo a função O^(1)_y 
     def Oy1(self,ro):
-        a = np.matmul(self.tensorProductSigYIdent, ro)
+        a = np.dot(self.tensorProductSigYIdent, ro)
         return np.trace(a)
 
 
     #Definindo a função O^(2)_y 
     def Oy2(self,ro):
-        a = np.matmul(self.tensorProductIdentSigY, ro)
+        a = np.dot(self.tensorProductIdentSigY, ro)
         return np.trace(a)
 
     #--------------------------------------------------
     #Definindo a função O^(1)_z 
     def Oz1(self,ro):
-        a = np.matmul(self.tensorProductSigZIdent, ro)
+        a = np.dot(self.tensorProductSigZIdent, ro)
         return np.trace(a)
 
 
     #Definindo a função O^(2)_z 
     def Oz2(self,ro):
-        a = np.matmul(self.tensorProductIdentSigZ, ro)
+        a = np.dot(self.tensorProductIdentSigZ, ro)
         return np.trace(a)
         
     def countDecimal(self):

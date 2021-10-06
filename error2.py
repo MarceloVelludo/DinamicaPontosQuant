@@ -16,12 +16,12 @@ j_12 = pi/140
 
 t0 = perf_counter()
 
-dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= 10, j_1_final= 10, passoJ_1 = 0.5,
-                                      j_2_inicial= 10, j_2_final= 10, passoJ_2 = 0.5,
-                                      bz_1_inicial= 0.1, bz_1_final= 0.3, passoBz_1 = 0.1,
-                                      bz_2_inicial= 0.1, bz_2_final= 0.3, passoBz_2 = 0.1,
-                                      j_12_inicial= 0.02, j_12_final= 1, passoJ_12 = 0.02,
-                                      tInicial=1, tFinal=20, passoT=1)
+dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial=1, j_1_final=1, passoJ_1 = 0.5,
+                 j_2_inicial=1, j_2_final=1, passoJ_2 = 0.5,
+                 bz_1_inicial=0.1, bz_1_final=10, passoBz_1 = 1.0,
+                 bz_2_inicial=0.1, bz_2_final=10, passoBz_2 = 1.0,
+                 j_12_inicial=0.1, j_12_final=10, passoJ_12 = 1.0,
+                 tInicial=1, tFinal=20, passoT=1)
 
 
 df = dpq.criaDataFrame()
