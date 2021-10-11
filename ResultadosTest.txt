@@ -99,34 +99,39 @@ Média do erro absoluto: 0.000533
 Média quadrada do erro: 0.000001 
 R2: 0.999988
 relative_error_1: 515.620961 
-relative_error_2: 0.249169====================
+relative_error_2: 0.249169
+====================
 [10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
 Média do erro absoluto: 0.000533 
 Média quadrada do erro: 0.000001 
 R2: 0.999988
 relative_error_1: 515.620961 
-relative_error_2: 0.249169====================
+relative_error_2: 0.249169
+====================
 [10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
 Média do erro absoluto: 0.000533 
 Média quadrada do erro: 0.000001 
 R2: 0.999988
 relative_error_1: 515.620961 
-relative_error_2: 0.249169====================
+relative_error_2: 0.249169
+====================
 [1:1:0.5][1:1:0.5][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][1:20:1]
 Média do erro absoluto: 0.727150 
 Média quadrada do erro: 1.425973 
 R2: 0.860736
 relative_error_1: 591.259338 
-relative_error_2: 116.491252====================
+relative_error_2: 116.491252
+====================
 [1:1:0.5][1:1:0.5][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][1:20:1]
 Média do erro absoluto: 0.727150 
 Média quadrada do erro: 1.425973 
 R2: 0.860736
 relative_error_1: 591.259338 
-relative_error_2: 116.491252====================
+relative_error_2: 116.491252
+====================
 [10:10:0.5][10:10:0.5][0.1:10:0.1][0.1:10:0.1][0.02:2:0.02][1:20:1]
 Média do erro absoluto: 0.001866 
 Média quadrada do erro: 0.000018 
 R2: 0.999947
 relative_error_1: 568746.833581 
-relative_error_2: 868.503815
+relative_error_2: 868.503815/1.000.000.000
