@@ -7,6 +7,8 @@ import itertools
 from itertools import product
 from numba import jit, vectorize 
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.metrics import mean_squared_error
 from sympy.physics.quantum import TensorProduct
 from time import perf_counter 
 from scipy.linalg import expm
@@ -294,10 +296,50 @@ class DinamicaPontosQuanticos:
         self.saveDataFrame()
         return self.dataSet
     
+    def loadDataFrame(self, path):
+        self.dataSet = pd.read_csv(path, index_col = 0)
+        return self.dataSet
+    
+    def grafico_acc_measures(self, path, accuracy, times):
+        plt.plot(times, accuracy, color='blue', marker='o')
+        plt.title('mse x tempos', fontsize=14)
+        plt.xlabel('Quantidade de tempo utilizado', fontsize=14)
+        plt.ylabel('média do erro ao quadrado', fontsize=14)
+        plt.grid(True)
+        plt.savefig("results/"+path[:-4]+"-msextempo"+".png")
+        return
+    
+    def gen_acc_measures(self,path):
+        dataSet = self.loadDataFrame(path)
+        X = dataSet.loc[:,dataSet.columns.str.startswith('o')]
+        y = dataSet.loc[:,dataSet.columns.str.startswith('j_12')]
+        #print("x:", np.array(X.iloc[:,:6]).shape)
+        #print("head x:", np.array(X.iloc[:,:6]))
+        #print("y:", len(np.array(y)))
+        #print("head y:", np.array(y).reshape(len(y),1))
+        mse = []
+        nb_measures = []
+        
+        for x_index in np.arange(start=6, stop=len(X.columns), step=6):
+            mse_array = np.array([])
+            for i in range(10):
+                X_train, X_test, y_train, y_test = train_test_split(np.array(X.iloc[:,:x_index]).reshape(len(y), x_index), np.array(y).reshape(len(y),), test_size=0.3, random_state= 0)
+                reg = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
+                #predict
+                y_test_pred = reg.predict(X_test)
+                mse_array = np.append(mse_array, mean_squared_error(y_test, y_test_pred))
+            #quantidade de tempo
+            qtd_tempo = int(x_index/6)
+
+            nb_measures.append(qtd_tempo)
+            mse.append(np.mean(mse_array))
+        
+        self.grafico_acc_measures(path, mse, nb_measures)
+        return
+        
     def saveDataFrame(self):
         if self.dataSet is None:
              self.criaDataFrame()
-        
         self.dataSet.to_csv(path_or_buf="./data/TabelasNovas/" + self.name + ".csv")
         return
     
