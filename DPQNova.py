@@ -445,7 +445,7 @@ class DinamicaPontosQuanticos:
             text_file.write("\n%s"%(self.name_comp))
             text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\nrelative_error_1: %f \nrelative_error_2: %f" % (mae, mse, r2, relative_error_1, relative_error_2))
 
-        graphics.plotGraph(y_real, y_pred, "Extra Trees Regressor"+name,self.name, mae, mse, r2)
+        graphics.plotGraph(y_real, y_pred, "Extra Trees Regressor "+name,self.name, mae, mse, r2)
 
         return
 
@@ -470,7 +470,7 @@ class DinamicaPontosQuanticos:
 
         df = self.criaDataFrame()
         X_val = df.iloc[:,5:]
-        Y_val = df.iloc[:,4]
+        y_val = df.iloc[:,4]
         y_val_pred = self.model.predict(X_val)
 
         self.make_report("teste aleatorio com K: %f "%k, y_val, y_val_pred)
