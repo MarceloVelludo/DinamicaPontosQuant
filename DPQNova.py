@@ -473,7 +473,7 @@ class DinamicaPontosQuanticos:
         Y_val = df.iloc[:,4]
         y_val_pred = self.model.predict(X_val)
 
-        self.make_report("teste aleatorio com K:"%k, y_val, y_val_pred)
+        self.make_report("teste aleatorio com K: %f "%k, y_val, y_val_pred)
 
         return
 
