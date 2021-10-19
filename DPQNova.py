@@ -443,7 +443,7 @@ class DinamicaPontosQuanticos:
             text_file.write("===="*5+"\n")
             text_file.write(name)
             text_file.write("\n%s"%(self.name_comp))
-            text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\nrelative_error_1: %f \nrelative_error_2: %f" % (mae, mse, r2, relative_error_1, relative_error_2))
+            text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\nrelative_error_1: %f \nrelative_error_2: %f\n" % (mae, mse, r2, relative_error_1, relative_error_2))
 
         graphics.plotGraph(y_real, y_pred, "Extra Trees Regressor "+name,self.name, mae, mse, r2)
 

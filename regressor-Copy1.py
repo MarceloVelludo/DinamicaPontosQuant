@@ -16,47 +16,9 @@ j_12 = pi/140
 
 t0 = perf_counter()
 
+
 dpq = DPQNova.DinamicaPontosQuanticos(passoJ_1 = 0.1, passoJ_2 = 0.1,passoBz_1 = 0.01,passoBz_2 = 0.01, passoJ_12 = 0.0001, tInicial=1, tFinal=20, passoT=1)
 
-df = dpq.criaDataFrame()
-t1 = perf_counter()
+dpq.make_results()
 
-X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 0)
-reg = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
-
-y_train_pred = reg.predict(X_train)
-t2 = perf_counter()
-mae = mean_absolute_error(y_train, y_train_pred)
-mse = mean_squared_error(y_train, y_train_pred)
-r2 = r2_score(y_train,y_train_pred)
-
-with open("Speed.txt", "a+") as text_file:
-    text_file.write("===="*5)
-    text_file.write("\n%s"%(dpq.name_comp))
-    text_file.write("Tempo tabela: %f \nTempo regressor: %f \n" % (t1-t0,t2-t1))
-
-
-with open("ResultadosTreino.txt", "a+") as text_file:
-    text_file.write("===="*5)
-    text_file.write("\n%s"%(dpq.name_comp))
-    text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\n" % (mae, mse, r2))
-    
-graphics.plotGraph(y_train,y_train_pred, "Extra Trees Regressor Train",dpq.name, mae, mse, r2)
-    
-y_test_pred = reg.predict(X_test)
-
-mae = mean_absolute_error(y_test, y_test_pred)
-mse = mean_squared_error(y_test, y_test_pred)
-r2 = r2_score(y_test,y_test_pred)
-
-with open("ResultadosTest.txt", "a+") as text_file:
-    text_file.write("===="*5)
-    text_file.write("\n%s"%(dpq.name_comp))
-    text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f \n" % (mae, mse, r2))
-
-graphics.plotGraph(y_test,y_test_pred, "Extra Trees Regressor Test",dpq.name ,mae, mse, r2)
-
-dpq.saveDataFrame()
-
-dpq.save_Y(y_test, y_test_pred, len(y_test))
 
