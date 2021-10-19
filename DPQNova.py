@@ -4,21 +4,26 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 import itertools
+import random
+import graphics
+
 from itertools import product
 from numba import jit, vectorize 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import ExtraTreesRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sympy.physics.quantum import TensorProduct
 from time import perf_counter 
 from scipy.linalg import expm
 from cmath import  *
 from decimal import *
+from time import perf_counter
 from multiprocessing import Pool
 #from math import *
 
 #A classe DinamicaPontosQuanticos calcula a dinamica no intervalo desejado e cria a tabela com os resultados.
 class DinamicaPontosQuanticos:
+    
     def countDecimal2(self):
         passos = [self.passoJ_1, self.passoJ_2, self.passoBz_1,self.passoBz_2, self.passoJ_12, self.passoT]
         decimals = np.array([])
@@ -94,6 +99,7 @@ class DinamicaPontosQuanticos:
         #self.arrayJ_12 = np.array([])
         #self.arrayT = np.array([])
         self.dataSet = None
+        self.model = None
         
      #Definição da equação da dinâmica de pontos quanticos versão mais completa.
     def hamiltoniana(self,j_1, j_2, bz_1, bz_2, j_12):
@@ -261,7 +267,7 @@ class DinamicaPontosQuanticos:
     
     #@vectorize(target="cuda")
     def criaFrameNovo(self):
-        print(len(self.elementos_iter))
+        #print(len(self.elementos_iter))
         t1 = t0 = perf_counter()
         
         reslts_hvalor =list(map(self.hamiltonianaNova, self.elementos_iter))
@@ -402,5 +408,91 @@ class DinamicaPontosQuanticos:
         fig.savefig(nome+".png")
         #plt.show()
         return
+
+    ###Teste Aleatório
+    def random_float(self,low, high):
+         return random.random()*(high-low) + low
+
+    def random_samples(self,low, high, k):
+        samples = []
+        for number_samples in range(k):
+            samples.append(self.random_float(low,high))
+        return samples
     
-   
+    ### modelo
+    def set_model(self, df = ""):
+        if df == "":
+            df = self.dataSet
+        X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 0)
+        self.model = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
+        return self.model, X_train, X_test, y_train, y_test
+
+    def make_report(self, name, y_real, y_pred):
+        relative_error_1 = 0
+        relative_error_2 = 0
+
+        mae = mean_absolute_error(y_real, y_pred)
+        mse = mean_squared_error(y_real, y_pred)
+        r2 = r2_score(y_real,y_pred)
+
+        for y_p, y_t in zip(y_pred, y_real):
+            relative_error_1 += np.abs(1-y_p)/y_t
+            relative_error_2 += np.abs((y_t-y_p)/y_t)
+
+        with open("Resultados.txt", "a+") as text_file:
+            text_file.write("===="*5+"\n")
+            text_file.write(name)
+            text_file.write("\n%s"%(self.name_comp))
+            text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\nrelative_error_1: %f \nrelative_error_2: %f" % (mae, mse, r2, relative_error_1, relative_error_2))
+
+        graphics.plotGraph(y_real, y_pred, "Extra Trees Regressor"+name,self.name, mae, mse, r2)
+
+        return
+
+    def make_speed(self,t0,t1, subname = "", name = ""):
+        if name == "":
+            name = self.name_comp
+        with open("Speed.txt", "a+") as text_file:
+            text_file.write("===="*5)
+            text_file.write(subname+"\n")
+            text_file.write("\n%s"%(name))
+            text_file.write("Tempo: %f \n" % (t1-t0))
+        return
+
+    def test_aleatorio(self, k):
+        arrayJ_1 = self.random_samples(self.j_1_inicial, self.j_2_final, k)
+        arrayJ_2 = self.random_samples(self.j_2_inicial, self.j_2_final, k)
+        arrayBz_1 = self.random_samples(self.bz_1_inicial, self.bz_1_final, k)
+        arrayBz_2 = self.random_samples(self.bz_2_inicial, self.bz_2_final, k)
+        arrayJ_12 = self.random_samples(self.j_12_inicial, self.j_12_final, k)
+
+        self.elementos_iter = list(product(arrayJ_1, arrayJ_2, arrayBz_1, arrayBz_2,  arrayJ_12))
+
+        df = self.criaDataFrame()
+        X_val = df.iloc[:,5:]
+        Y_val = df.iloc[:,4]
+        y_val_pred = self.model.predict(X_val)
+
+        make_results("teste aleatorio com K:"%k, y_val, y_val_pred)
+
+        return
+
+    def make_results(self, k = 10000):
+        t0 = perf_counter()
+        self.criaDataFrame()
+        model, X_train, X_test, y_train, y_test = self.set_model()
+
+        y_train_pred = model.predict(X_train)
+        self.make_report("Treino", y_train, y_train_pred)
+
+        y_test_pred = model.predict(X_test)
+        self.make_report("Teste", y_test, y_test_pred)
+        t1 = perf_counter()
+        self.make_speed(t0 = t0, t1 = t1)
+
+        t0 = perf_counter()
+        self.test_aleatorio(k)
+        t1 = perf_counter()
+        self.make_speed(t0 = t0, t1 = t1)
+
+        return

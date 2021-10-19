@@ -1,0 +1,78 @@
+====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000533 
+Média quadrada do erro: 0.000001 
+R2: 0.999988
+relative_error_1: 515.620961 
+relative_error_2: 0.249169====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000533 
+Média quadrada do erro: 0.000001 
+R2: 0.999988
+relative_error_1: 515.620961 
+relative_error_2: 0.249169====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000533 
+Média quadrada do erro: 0.000001 
+R2: 0.999988
+relative_error_1: 515.620961 
+relative_error_2: 0.249169====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000533 
+Média quadrada do erro: 0.000001 
+R2: 0.999988
+relative_error_1: 515.620961 
+relative_error_2: 0.249169====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000533 
+Média quadrada do erro: 0.000001 
+R2: 0.999988
+relative_error_1: 515.620961 
+relative_error_2: 0.249169
