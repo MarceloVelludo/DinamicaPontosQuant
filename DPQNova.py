@@ -466,7 +466,7 @@ class DinamicaPontosQuanticos:
         arrayBz_2 = self.random_samples(self.bz_2_inicial, self.bz_2_final, k)
         arrayJ_12 = self.random_samples(self.j_12_inicial, self.j_12_final, k)
 
-        self.elementos_iter = list(product(arrayJ_1, arrayJ_2, arrayBz_1, arrayBz_2,  arrayJ_12))
+        self.elementos_iter = random.sample(list(product(arrayJ_1, arrayJ_2, arrayBz_1, arrayBz_2,  arrayJ_12)), k)
 
         df = self.criaDataFrame()
         X_val = df.iloc[:,5:]
@@ -477,7 +477,7 @@ class DinamicaPontosQuanticos:
 
         return
 
-    def make_results(self, k = 10):
+    def make_results(self, k = 10000):
         t0 = perf_counter()
         self.criaDataFrame()
         model, X_train, X_test, y_train, y_test = self.set_model()
