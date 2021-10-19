@@ -10,6 +10,7 @@ onlyfiles = [join(path, f) for f in listdir(path) if isfile(join(path, f)) and "
 
 
 dpq = DPQNova.DinamicaPontosQuanticos()
-
+print("\nlista contém %i caminhos"%len(onlyfiles))
+print(onlyfiles)
 for file_path in onlyfiles:
     dpq.gen_acc_measures(file_path)

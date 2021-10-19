@@ -32,7 +32,7 @@ def plotGraph(y_test,y_pred,regressorName, name, mae, mse, r2):
 
 def plotGraph_error(y_test,y_pred,regressorName, name):
     try:
-        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 200))
+        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 500))
     except:
         print("Gráfico com menos de 400 pontos")
         

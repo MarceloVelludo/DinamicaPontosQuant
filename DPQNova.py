@@ -313,6 +313,7 @@ class DinamicaPontosQuanticos:
         plt.ylabel('média do erro ao quadrado', fontsize=14)
         plt.grid(True)
         plt.savefig("results/"+path[:-4]+"-msextempo"+".png")
+        plt.close()
         return
     
     def gen_acc_measures(self,path):
@@ -341,6 +342,7 @@ class DinamicaPontosQuanticos:
             mse.append(np.mean(mse_array))
         
         self.grafico_acc_measures(path, mse, nb_measures)
+        print("\nPath: %s, completo!"%path)
         return
         
     def saveDataFrame(self):
@@ -488,12 +490,12 @@ class DinamicaPontosQuanticos:
         y_test_pred = model.predict(X_test)
         self.make_report("Teste", y_test, y_test_pred)
         t1 = perf_counter()
-        self.make_speed(t0 = t0, t1 = t1)
+        self.make_speed(subname = "Criação das tabelas e treinamento do modelo", t0 = t0, t1 = t1)
 
         t0 = perf_counter()
         self.test_aleatorio(k)
         t1 = perf_counter()
-        self.make_speed(t0 = t0, t1 = t1)
+        self.make_speed(subname = "teste aleatorio",t0 = t0, t1 = t1)
         
         self.saveDataFrame()
         self.save_Y(y_test, y_test_pred, len(y_test))
