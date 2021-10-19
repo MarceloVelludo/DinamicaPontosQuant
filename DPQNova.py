@@ -477,7 +477,7 @@ class DinamicaPontosQuanticos:
 
         return
 
-    def make_results(self, k = 10000):
+    def make_results(self, k = 10):
         t0 = perf_counter()
         self.criaDataFrame()
         model, X_train, X_test, y_train, y_test = self.set_model()
