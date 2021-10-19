@@ -460,11 +460,11 @@ class DinamicaPontosQuanticos:
         return
 
     def test_aleatorio(self, k):
-        arrayJ_1 = self.random_samples(self.j_1_inicial, self.j_2_final, k)
-        arrayJ_2 = self.random_samples(self.j_2_inicial, self.j_2_final, k)
-        arrayBz_1 = self.random_samples(self.bz_1_inicial, self.bz_1_final, k)
-        arrayBz_2 = self.random_samples(self.bz_2_inicial, self.bz_2_final, k)
-        arrayJ_12 = self.random_samples(self.j_12_inicial, self.j_12_final, k)
+        arrayJ_1 = self.random_samples(self.j_1_inicial, self.j_2_final, 10)
+        arrayJ_2 = self.random_samples(self.j_2_inicial, self.j_2_final, 10)
+        arrayBz_1 = self.random_samples(self.bz_1_inicial, self.bz_1_final, 10)
+        arrayBz_2 = self.random_samples(self.bz_2_inicial, self.bz_2_final, 10)
+        arrayJ_12 = self.random_samples(self.j_12_inicial, self.j_12_final, 10)
 
         self.elementos_iter = random.sample(list(product(arrayJ_1, arrayJ_2, arrayBz_1, arrayBz_2,  arrayJ_12)), k)
 
