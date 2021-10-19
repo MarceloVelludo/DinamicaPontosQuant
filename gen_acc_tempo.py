@@ -9,8 +9,12 @@ path = "data/TabelasNovas/"
 onlyfiles = [join(path, f) for f in listdir(path) if isfile(join(path, f)) and "Y" not in str(f)]
 
 
-dpq = DPQNova.DinamicaPontosQuanticos()
+
 print("\nlista contém %i caminhos"%len(onlyfiles))
 print(onlyfiles)
 for file_path in onlyfiles:
-    dpq.gen_acc_measures(file_path)
+    try:
+        dpq = DPQNova.DinamicaPontosQuanticos()
+        dpq.gen_acc_measures(file_path)
+    except:
+        print("path:%s, mal sucedido!"%file_path)
