@@ -494,5 +494,8 @@ class DinamicaPontosQuanticos:
         self.test_aleatorio(k)
         t1 = perf_counter()
         self.make_speed(t0 = t0, t1 = t1)
+        
+        self.saveDataFrame()
+        self.save_Y(y_test, y_test_pred, len(y_test))
 
         return
