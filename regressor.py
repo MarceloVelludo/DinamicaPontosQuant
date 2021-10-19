@@ -26,7 +26,4 @@ dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= 10, j_1_final= 10, passoJ_1 =
 
 dpq.make_results()
 
-dpq.saveDataFrame()
-
-dpq.save_Y(y_test, y_test_pred, len(y_test))
 
