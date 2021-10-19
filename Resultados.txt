@@ -1,0 +1,48 @@
+====================
+Treino
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1058.945512 
+relative_error_2: 0.000000
+====================
+Teste
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.000446 
+Média quadrada do erro: 0.000001 
+R2: 0.999992
+relative_error_1: 515.613773 
+relative_error_2: 0.212754
+====================
+Treino
+[1:1:0.5][1:1:0.5][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][1:20:1]
+Média do erro absoluto: 0.000000 
+Média quadrada do erro: 0.000000 
+R2: 1.000000
+relative_error_1: 1332.916229 
+relative_error_2: 0.000000
+====================
+Teste
+[1:1:0.5][1:1:0.5][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][1:20:1]
+Média do erro absoluto: 0.725675 
+Média quadrada do erro: 1.429577 
+R2: 0.860384
+relative_error_1: 594.902833 
+relative_error_2: 112.690470
+====================
+teste aleatorio com K: 10000.000000 
+[10:10:0.5][10:10:0.5][0.1:0.3:0.1][0.1:0.3:0.1][0.02:1:0.02][1:20:1]
+Média do erro absoluto: 0.001609 
+Média quadrada do erro: 0.000004 
+R2: 0.999957
+relative_error_1: 70728.059277 
+relative_error_2: 146.006787
+====================
+teste aleatorio com K: 10000.000000 
+[1:1:0.5][1:1:0.5][0.1:10:1.0][0.1:10:1.0][0.1:10:1.0][1:20:1]
+Média do erro absoluto: 0.738219 
+Média quadrada do erro: 1.109826 
+R2: 0.906584
+relative_error_1: 7994.285963 
+relative_error_2: 5125.754703
