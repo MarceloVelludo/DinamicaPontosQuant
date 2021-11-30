@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import itertools
 import random
 import graphics
-
+from os import listdir
+from os.path import isfile, join
 from itertools import product
 from numba import jit, vectorize 
 from sklearn.model_selection import train_test_split
@@ -422,11 +423,29 @@ class DinamicaPontosQuanticos:
         return samples
     
     ### modelo
+    def check_model(self):
+        #Path to tables directory.
+        path = "data/Models/"
+        onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+        matching = [s for s in onlyfiles if self.name in s]
+        
+        if not matching:
+            return True
+        else:
+            self.loadDataFrame(matching[0])
+            return False
+        
     def set_model(self, df = ""):
         if df == "":
             df = self.dataSet
         X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 0)
-        self.model = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
+        #Se o modelo ja existir carrega ele, se não faz um novo e guarda ele.
+        if(self.check_model):
+            self.model = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
+            pickle.dump(self.model, open("./data/Models/"+self.name, 'wb'))
+        else:
+            self.model = pickle.load(open("./data/Models/"+self.name, 'rb'))
+            
         return self.model, X_train, X_test, y_train, y_test
 
     def make_report(self, name, y_real, y_pred):
@@ -478,10 +497,25 @@ class DinamicaPontosQuanticos:
         self.make_report("teste aleatorio com K: %f "%k, y_val, y_val_pred)
 
         return
+    #Check if the table requested is in the base
+    def check_tabela(self):
+        #Path to tables directory.
+        path = "data/TabelasNovas/"
+        onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+        matching = [s for s in onlyfiles if self.name in s]
+        
+        if not matching:
+            return True
+        else:
+            self.loadDataFrame(matching[0])
+            return False
 
     def make_results(self, k = 10000):
         t0 = perf_counter()
-        self.criaDataFrame()
+        #Se existir da load e retorna falso, caso contrário um novo frame será criado.
+        if(self.check_tabela()):
+            self.criaDataFrame()
+            
         model, X_train, X_test, y_train, y_test = self.set_model()
 
         y_train_pred = model.predict(X_train)
