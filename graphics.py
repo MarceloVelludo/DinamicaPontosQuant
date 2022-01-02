@@ -4,12 +4,15 @@ import random
 from matplotlib.pyplot import figure
 import plotly.express as px
 import plotly.graph_objects as go
+import traceback
 
 def plotGraph(y_test,y_pred,regressorName, name, mae, mse, r2):
+    y_t = y_test
+    y_p = y_pred
     try:
-        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 100))
+        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 150))
     except:
-        print("Gráfico com menos de 400 pontos")
+        print("Gráfico com menos de 150 pontos")
         
     if max(y_test) >= max(y_pred):
         my_range = int(max(y_test))
@@ -26,15 +29,18 @@ def plotGraph(y_test,y_pred,regressorName, name, mae, mse, r2):
     plt.savefig("./data/TabelasFotos/"+'%s-%s.png'%(regressorName, name))
     plt.close()
     
-    plotGraph_error(y_test,y_pred,regressorName, name)
+    plotGraph_error(y_t,y_p,regressorName, name)
     
     return
 
 def plotGraph_error(y_test,y_pred,regressorName, name):
+    
     try:
-        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 500))
-    except:
-        print("Gráfico com menos de 400 pontos")
+        y_test, y_pred=zip(*random.sample(list(zip(y_test, y_pred)), 5000))
+    except Exception: 
+        print(Exception)
+        traceback.print_exc()
+        print("Gráfico com menos de 1600 pontos")
         
     if max(y_test) >= max(y_pred):
         my_range = int(max(y_test))

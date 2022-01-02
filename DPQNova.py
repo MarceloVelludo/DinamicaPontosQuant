@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import itertools
 import random
 import graphics
+import pickle 
 from os import listdir
 from os.path import isfile, join
 from itertools import product
@@ -93,6 +94,8 @@ class DinamicaPontosQuanticos:
         self.arrayJ_12 = (np.arange(self.j_12_inicial*decimalJ_12, decimalJ_12*self.j_12_final+self.passoJ_12*decimalJ_12, self.passoJ_12*decimalJ_12)/decimalJ_12).tolist()
         self.arrayT = (np.arange(self.tInicial*decimalT, decimalT*self.tFinal+self.passoT*decimalT, self.passoT*decimalT)/decimalT).tolist()
         self.elementos_iter = list(product(self.arrayJ_1, self.arrayJ_2, self.arrayBz_1, self.arrayBz_2,  self.arrayJ_12))
+        ##print("elementos:\n", self.elementos_iter)
+        #_ = [#print(str(y)+"--"+str(x)+"\n") for y,x in enumerate(self.elementos_iter)]
         #self.arrayJ_1 = np.array([])
         #self.arrayJ_2 = np.array([])
         #self.arrayBz_1 = np.array([])
@@ -104,7 +107,7 @@ class DinamicaPontosQuanticos:
         
      #Definição da equação da dinâmica de pontos quanticos versão mais completa.
     def hamiltoniana(self,j_1, j_2, bz_1, bz_2, j_12):
-        #print("parametros hamiltoniana:", j_1, j_2, bz_1, bz_2, j_12)
+        ##print("parametros hamiltoniana:", j_1, j_2, bz_1, bz_2, j_12)
         #input()
         return  0.5*(np.multiply(j_1, self.tensorProductSigZIdent) + np.multiply(j_2,self.tensorProductIdentSigZ) + 0.5*np.multiply(j_12,(self.tensorProductSigZSigZ - self.tensorProductSigZIdent - self.tensorProductIdentSigZ)) + np.multiply(bz_1,self.tensorProductSigXIdent) + np.multiply(bz_2,self.tensorProductIdentSigX))
 
@@ -116,7 +119,7 @@ class DinamicaPontosQuanticos:
         bz_1 = parametros[2]
         bz_2 = parametros[3] 
         j_12 = parametros[4]
-        #print("parametros hamiltoniana:",parametros)
+        ##print("parametros hamiltoniana:",parametros)
         #input()
         return  0.5*(np.multiply(j_1, self.tensorProductSigZIdent) + np.multiply(j_2,self.tensorProductIdentSigZ) + 0.5*np.multiply(j_12,(self.tensorProductSigZSigZ - self.tensorProductSigZIdent - self.tensorProductIdentSigZ)) + np.multiply(bz_1,self.tensorProductSigXIdent) + np.multiply(bz_2,self.tensorProductIdentSigX))
 
@@ -128,7 +131,7 @@ class DinamicaPontosQuanticos:
         eq3 = np.multiply(-1, eq2)
         #result = expm((np.matmul(np.matmul(h,t),(-1j))))
         result = expm(eq3)
-        #print('result:', result)
+        ##print('result:', result)
         return result
     
     #Retorna o eigenvalues da multiplicação de ro com ro tempo reverso
@@ -155,9 +158,9 @@ class DinamicaPontosQuanticos:
     #Definindo a função operador densidade.
     def ro(self,t, h):
         u = self.u(t, h)
-        #print("u:\n", u)
-        #print("matrix:\n", np.matrix(u))
-        #print("matrix dagger:\n", np.matrix(u).getH())
+        ##print("u:\n", u)
+        ##print("matrix:\n", np.matrix(u))
+        ##print("matrix dagger:\n", np.matrix(u).getH())
         #input()
         return np.dot(np.dot(u,self.ro0), np.array(np.matrix(u).getH()))
 
@@ -214,8 +217,8 @@ class DinamicaPontosQuanticos:
         t1 = t0 = perf_counter()
         j_12_len = len(self.arrayJ_12)
         for index,j12Dez in enumerate(self.arrayJ_12):
-            #print("{:.1f}\n".format(index/j_12_len))
-            #print("Total tempo gasto: ", t1 - t0)
+            ##print("{:.1f}\n".format(index/j_12_len))
+            ##print("Total tempo gasto: ", t1 - t0)
             #t0 = perf_counter()
             j_12 = j12Dez
             for j1Dez in self.arrayJ_1:
@@ -245,11 +248,11 @@ class DinamicaPontosQuanticos:
         colunas = int((((((self.tFinal - self.tInicial)/self.passoT)+1)*6)+5))
         linhas = int(len(results)/colunas)
         
-        print('colunas:', colunas)
-        print("Total tempo gasto: ", t1 - t0)   
-        print("results shape:", results.shape)
-        print("Tamanho:", len(results))
-        print('linhas:', linhas)
+        #print('colunas:', colunas)
+        #print("Total tempo gasto: ", t1 - t0)   
+        #print("results shape:", results.shape)
+        #print("Tamanho:", len(results))
+        #print('linhas:', linhas)
         return np.float32(results.reshape(linhas, colunas))
     
     #@vectorize(target="cuda")
@@ -268,7 +271,7 @@ class DinamicaPontosQuanticos:
     
     #@vectorize(target="cuda")
     def criaFrameNovo(self):
-        #print(len(self.elementos_iter))
+        ##print(len(self.elementos_iter))
         t1 = t0 = perf_counter()
         
         reslts_hvalor =list(map(self.hamiltonianaNova, self.elementos_iter))
@@ -277,17 +280,17 @@ class DinamicaPontosQuanticos:
         t1 = perf_counter()
         colunas = int(((((self.tFinal - self.tInicial)/self.passoT)+1)*6))
         linhas = int(len(self.elementos_iter))
-        print("elementos_iter_array: ", self.elementos_iter[:5])
-        #print('colunas:', colunas)
-        print("Total tempo gasto: ", t1 - t0)   
-        #print("results shape:", results.shape)
-        print("Tamanho:", len(resultsOxJ))
-        print("resultados:", resultsOxJ[:5])
-        #print('linhas:', linhas)
+        #print("elementos_iter_array: ", self.elementos_iter[:5])
+        ##print('colunas:', colunas)
+        #print("Total tempo gasto: ", t1 - t0)   
+        ##print("results shape:", results.shape)
+        #print("Tamanho:", len(resultsOxJ))
+        #print("resultados:", resultsOxJ[:5])
+        ##print('linhas:', linhas)
         
         #Compila o resultado com os elementos referentes a cada resultado
         result = np.hstack((np.reshape(np.array(self.elementos_iter), (linhas, 5)),np.reshape(np.array(resultsOxJ), (linhas, colunas))))
-        print(result.shape)
+        #print(result.shape)
         return result
     
     #dataframe
@@ -298,9 +301,9 @@ class DinamicaPontosQuanticos:
             listOFlat = np.append(listOFlat, np.array(tempos))
         return np.append(np.append(np.append(np.append(['j_1'],['j_2']),np.append(['bz_1'], ['bz_2'])), ['j_12_Target']) , listOFlat)
     
-    def criaDataFrame(self):
+    def criaDataFrame(self, complemento_nome = ""):
         self.dataSet = pd.DataFrame(self.criaFrameNovo(), columns = self.getNames())
-        self.saveDataFrame()
+        self.saveDataFrame(complemento_nome)
         return self.dataSet
     
     def loadDataFrame(self, path):
@@ -313,25 +316,25 @@ class DinamicaPontosQuanticos:
         plt.xlabel('Quantidade de tempo utilizado', fontsize=14)
         plt.ylabel('média do erro ao quadrado', fontsize=14)
         plt.grid(True)
-        plt.savefig("results/"+path[:-4]+"-msextempo"+".png")
+        plt.savefig("results/"+self.name+"-msextempo"+".png")
         plt.close()
         return
     
-    def gen_acc_measures(self,path):
-        dataSet = self.loadDataFrame(path)
-        X = dataSet.loc[:,dataSet.columns.str.startswith('o')]
-        y = dataSet.loc[:,dataSet.columns.str.startswith('j_12')]
-        #print("x:", np.array(X.iloc[:,:6]).shape)
-        #print("head x:", np.array(X.iloc[:,:6]))
-        #print("y:", len(np.array(y)))
-        #print("head y:", np.array(y).reshape(len(y),1))
+    def gen_acc_measures(self):
+        path = "data/TabelasNovas/"
+        X = self.dataSet.loc[:,self.dataSet.columns.str.startswith('o')]
+        y = self.dataSet.loc[:,self.dataSet.columns.str.startswith('j_12')]
+        ##print("x:", np.array(X.iloc[:,:6]).shape)
+        ##print("head x:", np.array(X.iloc[:,:6]))
+        ##print("y:", len(np.array(y)))
+        ##print("head y:", np.array(y).reshape(len(y),1))
         mse = []
         nb_measures = []
         
         for x_index in np.arange(start=6, stop=len(X.columns), step=6):
             mse_array = np.array([])
             for i in range(10):
-                X_train, X_test, y_train, y_test = train_test_split(np.array(X.iloc[:,:x_index]).reshape(len(y), x_index), np.array(y).reshape(len(y),), test_size=0.3, random_state= 0)
+                X_train, X_test, y_train, y_test = train_test_split(np.array(X.iloc[:,:x_index]).reshape(len(y), x_index), np.array(y).reshape(len(y),), test_size=0.3, random_state= 7)
                 reg = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
                 #predict
                 y_test_pred = reg.predict(X_test)
@@ -343,13 +346,13 @@ class DinamicaPontosQuanticos:
             mse.append(np.mean(mse_array))
         
         self.grafico_acc_measures(path, mse, nb_measures)
-        print("\nPath: %s, completo!"%path)
+        #print("\nPath: %s, completo!"%path)
         return
         
-    def saveDataFrame(self):
+    def saveDataFrame(self, complemento_nome = ""):
         if self.dataSet is None:
              self.criaDataFrame()
-        self.dataSet.to_csv(path_or_buf="./data/TabelasNovas/" + self.name + ".csv")
+        self.dataSet.to_csv(path_or_buf="./data/TabelasNovas/"+complemento_nome+ self.name + ".csv")
         return
     
     def saveDataFrameY(self, datasetY):
@@ -357,7 +360,7 @@ class DinamicaPontosQuanticos:
         return
     
     def save_Y(self, yReal, yPred, lenght):
-        print("shape:", np.array(yReal).reshape((lenght,-1)).shape)
+        #print("shape:", np.array(yReal).reshape((lenght,-1)).shape)
         yReal = np.array(yReal).reshape((lenght,-1))
         yPred = np.array(yPred).reshape((lenght,-1))
         datasetY = pd.DataFrame(np.hstack([yReal, yPred]), columns = ["yReal","yPred"])
@@ -393,14 +396,14 @@ class DinamicaPontosQuanticos:
 
         t1 = perf_counter()
         
-        print('ox1 shape:', ox1.shape)
-        print('ox2 shape:', ox2.shape)
-        print('oy1 shape:', oy1.shape)
-        print('oy2 shape:', oy2.shape)
-        print('oz1 shape:', oz1.shape)
-        print('oz2 shape:', oz2.shape)
-        print('tempos shape:', tempos.shape)
-        print("Total tempo gasto: ", t1 - t0)
+        #print('ox1 shape:', ox1.shape)
+        #print('ox2 shape:', ox2.shape)
+        #print('oy1 shape:', oy1.shape)
+        #print('oy2 shape:', oy2.shape)
+        #print('oz1 shape:', oz1.shape)
+        #print('oz2 shape:', oz2.shape)
+        #print('tempos shape:', tempos.shape)
+        #print("Total tempo gasto: ", t1 - t0)
         return pd.DataFrame(ox1, columns = ['ox1']), pd.DataFrame(ox2, columns = ['ox2']), pd.DataFrame(oy1, columns = ['oy1']), pd.DataFrame(oy2, columns = ['oy2']), pd.DataFrame(oz1, columns = ['oz1']), pd.DataFrame(oz2, columns = ['oz2']), pd.DataFrame(tempos, columns = ['tempo'])
 
     def criaGraficos(self, dataFrame, tempos,nome):
@@ -428,7 +431,7 @@ class DinamicaPontosQuanticos:
         path = "data/Models/"
         onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
         matching = [s for s in onlyfiles if self.name in s]
-        
+        #print("matching:\n", matching)
         if not matching:
             return True
         else:
@@ -438,7 +441,8 @@ class DinamicaPontosQuanticos:
     def set_model(self, df = ""):
         if df == "":
             df = self.dataSet
-        X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 0)
+        #print("df:\n", df)
+        X_train, X_test, y_train, y_test = train_test_split(df.iloc[:,5:], df.iloc[:,4], test_size=0.3, random_state= 7)
         #Se o modelo ja existir carrega ele, se não faz um novo e guarda ele.
         if(self.check_model):
             self.model = ExtraTreesRegressor(n_estimators=100, random_state=0, n_jobs= -1).fit(X_train, y_train)
@@ -467,7 +471,8 @@ class DinamicaPontosQuanticos:
             text_file.write("\nMédia do erro absoluto: %f \nMédia quadrada do erro: %f \nR2: %f\nrelative_error_1: %f \nrelative_error_2: %f\n" % (mae, mse, r2, relative_error_1, relative_error_2))
 
         graphics.plotGraph(y_real, y_pred, "Extra Trees Regressor "+name,self.name, mae, mse, r2)
-
+        self.gen_acc_measures()
+        
         return
 
     def make_speed(self,t0,t1, subname = "", name = ""):
@@ -488,11 +493,12 @@ class DinamicaPontosQuanticos:
         arrayJ_12 = self.random_samples(self.j_12_inicial, self.j_12_final, 10)
 
         self.elementos_iter = random.sample(list(product(arrayJ_1, arrayJ_2, arrayBz_1, arrayBz_2,  arrayJ_12)), k)
-
-        df = self.criaDataFrame()
+        #print("\n len teste aleatorio:", len(self.elementos_iter))
+        df = self.criaDataFrame("teste-k-")
         X_val = df.iloc[:,5:]
         y_val = df.iloc[:,4]
         y_val_pred = self.model.predict(X_val)
+        #print("len y_val_pred:",len(y_val_pred))
 
         self.make_report("teste aleatorio com K: %f "%k, y_val, y_val_pred)
 
@@ -502,15 +508,22 @@ class DinamicaPontosQuanticos:
         #Path to tables directory.
         path = "data/TabelasNovas/"
         onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
-        matching = [s for s in onlyfiles if self.name in s]
-        
+        matching = [s for s in onlyfiles if (self.name in s) and (not 'y' in s) and (not "k" in s) ]
+        #print("files:", onlyfiles)
+        #print("\nMatching:", matching)
         if not matching:
             return True
         else:
-            self.loadDataFrame(matching[0])
+            self.loadDataFrame(path+matching[0])
             return False
 
     def make_results(self, k = 10000):
+        #Hyperparametros para testes:
+        #Controla o numero de arvore de decisões que vão ser usadas.
+        #Muitas àrvores pode gerar overfitting, mas isso é dificil de ocorrer com extra-trees
+        #n_trees = [10, 50, 100, 500, 1000, 5000]
+        #O numero maximo de feature que pode ser considerado para a repartição de cada nó, parametro mais importante do modelo.
+        #max_features= [1,2,3,4,5,6,7,8,9,10,11,12]
         t0 = perf_counter()
         #Se existir da load e retorna falso, caso contrário um novo frame será criado.
         if(self.check_tabela()):
@@ -524,14 +537,17 @@ class DinamicaPontosQuanticos:
         y_test_pred = model.predict(X_test)
         self.make_report("Teste", y_test, y_test_pred)
         t1 = perf_counter()
+        
         self.make_speed(subname = "Criação das tabelas e treinamento do modelo", t0 = t0, t1 = t1)
-
+        
+        self.saveDataFrame()
+        self.save_Y(y_test, y_test_pred, len(y_test))
+        
         t0 = perf_counter()
         self.test_aleatorio(k)
         t1 = perf_counter()
         self.make_speed(subname = "teste aleatorio",t0 = t0, t1 = t1)
         
-        self.saveDataFrame()
-        self.save_Y(y_test, y_test_pred, len(y_test))
+        
 
         return

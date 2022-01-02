@@ -18,8 +18,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 dpq = DPQNova.DinamicaPontosQuanticos(j_1_inicial= 10, j_1_final= 10, passoJ_1 = 0.5,
                                       j_2_inicial= 10, j_2_final= 10, passoJ_2 = 0.5,
-                                      bz_1_inicial= 0.1, bz_1_final= 10, passoBz_1 = 0.1,
-                                      bz_2_inicial= 0.1, bz_2_final= 10, passoBz_2 = 0.1,
+                                      bz_1_inicial= 0.1, bz_1_final= 10, passoBz_1 = 0.001,
+                                      bz_2_inicial= 0.1, bz_2_final= 10, passoBz_2 = 0.001,
                                       j_12_inicial= 0.02, j_12_final= 2, passoJ_12 = 0.02,
                                       tInicial=1, tFinal=20, passoT=1)
 
